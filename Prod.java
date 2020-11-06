@@ -15,22 +15,24 @@ public class Prod extends HttpServlet{
         String b=request.getParameter("barcode");
         String c=request.getParameter("color");
         String d=request.getParameter("description");
+
+        out.println("<br> product name: " + n +" <br> barcode: " +b+ "<br> color: "+c+"<br> description: "+d);
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/prodlist", "aah", "shit");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/prodlist", "root", "1012");
  
             PreparedStatement ps = con.prepareStatement("insert into prod values('"+n+","+b+","+c+","+d+")");
             
  
             int i = ps.executeUpdate();
             if (i > 0)
-                out.print("product registered");
+            out.println("Product registered successfully");
+          
  
         } catch (Exception e2) {
             System.out.println(e2);
         }
  
         out.close();
-        out.println("<br>Got product name " + n +" with barcode " +b);
     }
 }
